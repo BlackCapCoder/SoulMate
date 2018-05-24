@@ -26,7 +26,7 @@ parseOp = flip lookup
   , ('$', Pop)
   , (',', Toggle)
   , ('#', Pass)
-  , ('!', LNAnd)
+  -- , ('!', LNAnd)
   ]
 
 parseProgram = mapMaybe parseOp
@@ -66,7 +66,7 @@ runProgram os = do
   let f = runBitGet . fmap snd . flip runStateT ([], []) $ mapM_ runOp os
   let x = runGet f inp
   let y = runPut . runBitPut . mapM_ putBool $ uncurry (++) x
-  -- print x
+  print x
   return y
 
 main :: IO ()
