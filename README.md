@@ -17,3 +17,9 @@ SoulMate currently support the following operations:
 | `#`    | Pops the topmost element off the stack and push it to the other machine's stack                                |
 
 At the moment SoulMate is not turing-complete, because there is no way to loop.
+
+#### IO
+
+Initially, both stacks are empty. If either machine attempts to pop from an empty stack, a single bit is read from STDIN. If no input is available on STDIN you get a zero instead.
+
+Once the program terminates, both stacks are concatenated and the resulting sequence of bits are written to STDOUT.
