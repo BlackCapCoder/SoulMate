@@ -18,7 +18,7 @@ SoulMate currently support the following operations:
 
 At the moment SoulMate is not turing-complete, because there is no way to loop.
 
-#### IO
+## IO
 
 Initially, both stacks are empty. If either machine attempts to pop from an empty stack, a single bit is read from STDIN. If no input is available on STDIN you get a zero instead.
 
