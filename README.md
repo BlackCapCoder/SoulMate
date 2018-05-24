@@ -22,7 +22,7 @@ SoulMate currently support the following operations:
 
 Initially, both stacks are empty. If either machine attempts to pop from an empty stack, a single bit is read from STDIN. If no input is available on STDIN you get a zero instead.
 
-Once the program terminates, both stacks are concatenated and the resulting sequence of bits are written to STDOUT.
+Once the program terminates the bits of the active stack are written to STDOUT.
 
 ## byte version
 

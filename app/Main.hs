@@ -65,7 +65,7 @@ runProgram os = do
   inp <- BS.getContents
   let f = runBitGet . fmap snd . flip runStateT ([], []) $ mapM_ runOp os
   let x = runGet f inp
-  let y = runPut . runBitPut . mapM_ putBool $ uncurry (++) x
+  let y = runPut . runBitPut . mapM_ putBool $ fst x
   -- print x
   return y
 
