@@ -1,6 +1,6 @@
 # SoulMate
 
-SoulMate is a esoteric programming language where you have two stack machines cooperating to achieve turing-completeness. In case you don't know, a stack machine alone is not turing-complete, but two or more cooperating is.
+SoulMate is an esoteric programming language where you have two stack machines cooperating to achieve turing-completeness. In case you don't know, a stack machine alone is not turing-complete, but two or more cooperating is.
 
 Besides stack manipulation operations, the machines support the NAnd gate, with which you can simulate all the other logic operations. The machines work on the bit-level.
 
