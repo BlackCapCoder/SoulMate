@@ -16,17 +16,14 @@ import Control.Arrow
 import System.Environment
 import System.IO
 
-data Op  = NAnd | Zero | Dup | Swap | Pop | Toggle | LNAnd | Pass
+data Op  = NAnd | Dup | Swap | Toggle | Pass
 
 parseOp = flip lookup
   [ ('&', NAnd)
-  , ('0', Zero)
   , (':', Dup)
   , ('/', Swap)
-  , ('$', Pop)
   , (',', Toggle)
   , ('#', Pass)
-  -- , ('!', LNAnd)
   ]
 
 parseProgram = mapMaybe parseOp
@@ -48,16 +45,11 @@ putBit :: Bool -> Machine (Memory Bool) ()
 putBit b = modify $ \(x,y) -> (b:x, y)
 
 runOp = \case
-  Zero   -> putBit False
   Toggle -> modify swap
-  Pop    -> void getBit
   Dup    -> do a <- getBit; putBit a; putBit a
   Swap   -> do a <- getBit; b <- getBit; putBit a; putBit b
   NAnd   -> do a <- getBit; b <- getBit; putBit . not $ a && b
   Pass   -> do a <- getBit; modify $ \(l,r) -> (l, a:r)
-  LNAnd  -> fix $ \r -> do
-    x <- getBit
-    when x $ runOp NAnd >> r
 
 --------
 
