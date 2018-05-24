@@ -25,8 +25,8 @@ parseOp = flip lookup
   , ('/', Swap)
   , ('$', Pop)
   , (',', Toggle)
-  , ('!', LNAnd)
   , ('#', Pass)
+  , ('!', LNAnd)
   ]
 
 parseProgram = mapMaybe parseOp
@@ -74,4 +74,4 @@ main = do
   args <- concat <$> getArgs
   code <- readFile args
   let ops = parseProgram code
-  BS.putStr =<< runProgram ops
+  BS.putStr . BS.reverse =<< runProgram ops
