@@ -16,7 +16,7 @@ SoulMate currently support the following operations:
 | `,`    | Give focus to the other stack machine such that all proceeding operations will be executed on the second stack |
 | `#`    | Pops the topmost element off the stack and push it to the other machine's stack                                |
 
-At the moment SoulMate is not turing-complete, because there is no way to loop.
+*At the moment SoulMate is not turing-complete, because there is no way to loop.*
 
 ## IO
 
