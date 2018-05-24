@@ -66,7 +66,7 @@ runProgram os = do
   let f = runBitGet . fmap snd . flip runStateT ([], []) $ mapM_ runOp os
   let x = runGet f inp
   let y = runPut . runBitPut . mapM_ putBool $ uncurry (++) x
-  print x
+  -- print x
   return y
 
 main :: IO ()
@@ -74,4 +74,4 @@ main = do
   args <- concat <$> getArgs
   code <- readFile args
   let ops = parseProgram code
-  BS.putStr . BS.reverse =<< runProgram ops
+  BS.putStr =<< runProgram ops

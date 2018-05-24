@@ -23,3 +23,11 @@ SoulMate currently support the following operations:
 Initially, both stacks are empty. If either machine attempts to pop from an empty stack, a single bit is read from STDIN. If no input is available on STDIN you get a zero instead.
 
 Once the program terminates, both stacks are concatenated and the resulting sequence of bits are written to STDOUT.
+
+## byte version
+
+Operations that work on bytes implemented in terms of bits can be found in the `8` folder. So, for instance, if you wanted the first 3 bytes of the input in reverse order on the stack, you could just go:
+``` bash
+(cd 8; cat swap pass swap toggle pass toggle swap) > code
+echo abc | stack exec nand-exe -- code
+```
