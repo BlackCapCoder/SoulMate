@@ -34,3 +34,5 @@ executables:
     - binary-bits
     - bytestring
     - mtl
+    - megaparsec
+    - containers

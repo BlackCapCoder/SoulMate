@@ -1,7 +1,6 @@
 {-# LANGUAGE LambdaCase, MonadComprehensions, MultiWayIf #-}
 module Main where
 
-import Data.Maybe
 import Data.Tuple (swap)
 import Data.Binary
 import Data.Binary.Get hiding (isEmpty)
@@ -16,19 +15,9 @@ import Control.Arrow
 import System.Environment
 import System.IO
 
-data Op  = NAnd | Dup | Swap | Toggle | Pass
+import Lang
+import Assembler
 
-parseOp = flip lookup
-  [ ('&', NAnd)
-  , (':', Dup)
-  , ('/', Swap)
-  , (',', Toggle)
-  , ('#', Pass)
-  ]
-
-parseProgram = mapMaybe parseOp
-
----------
 
 type Memory  a = ([a], [a])
 type Machine s = StateT s BitGet
@@ -42,7 +31,7 @@ getBit = do
          if e then return False else lift getBool
 
 putBit :: Bool -> Machine (Memory Bool) ()
-putBit b = modify $ \(x,y) -> (b:x, y)
+putBit b = modify $ first (b:)
 
 runOp = \case
   Toggle -> modify swap
@@ -63,7 +52,16 @@ runProgram os = do
 
 main :: IO ()
 main = do
-  args <- concat <$> getArgs
+  interpreter
+
+interpreter = do
+  args <- unwords <$> getArgs
   code <- readFile args
   let ops = parseProgram code
   BS.putStr =<< runProgram ops
+
+assembler = do
+  args <- unwords <$> getArgs
+  code <- readFile args
+  Just out <- assemble code
+  putStr out
