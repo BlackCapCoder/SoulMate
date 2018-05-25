@@ -1,6 +1,4 @@
 #zero
 #mux
 
-pop {
-  $zero $mux
-}
+pop { $zero $mux }

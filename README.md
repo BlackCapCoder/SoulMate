@@ -2,17 +2,17 @@
 
 SoulMate is an esoteric programming language where you have two stack machines cooperating to achieve turing-completeness. In case you don't know, a stack machine alone is not turing-complete, but two or more cooperating is.
 
-Besides stack manipulation operations, the machines support the NAnd gate, with which you can simulate all the other logic operations. The machines work on the bit-level.
+Besides stack manipulation operations, the machines support the NAND gate, with which you can simulate all of the other logic operations. The machines work on the bit-level.
 
 SoulMate currently support the following operations:
 
 | Symbol | Description                                                                                                    |
 |--------|----------------------------------------------------------------------------------------------------------------|
-| `&`    | Pops two bits off the stack, then pushes the result of the NAnd operation                                      |
 | `:`    | Duplicates the topmost element on the stack                                                                    |
 | `/`    | Swaps the two topmost elements on the stack                                                                    |
-| `,`    | Give focus to the other stack machine such that all proceeding operations will be executed on the second stack |
-| `#`    | Pops the topmost element off the stack and push it to the other machine's stack                                |
+| `,`    | Give focus to the other stack machine such that all proceeding operations will be executed on the other stack  |
+| `#`    | Pops the topmost element off the stack, then pushes it on to the other machine's stack                         |
+| `&`    | Pops two bits off the stack, then pushes the result of the NAND operation                                      |
 
 *At the moment SoulMate is not turing-complete, because there is no way to loop.*
 
