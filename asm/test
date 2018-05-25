@@ -1,6 +1,0 @@
-# swap8
-# pass8
-
-main {
-  $swap8 $pass8 $swap8 , $pass8 , $swap8
-}

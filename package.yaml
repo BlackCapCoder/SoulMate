@@ -36,3 +36,4 @@ executables:
     - mtl
     - megaparsec
     - containers
+    - directory

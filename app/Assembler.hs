@@ -8,6 +8,7 @@ import qualified Text.Megaparsec.Char.Lexer as L
 import Control.Monad
 import Data.Void
 import Data.Maybe
+import System.Directory
 
 import Lang
 
@@ -64,7 +65,15 @@ assemble code = do
 assemble' :: String -> IO (Maybe Tree)
 assemble' code = do
   Right is <- pure $ runParser (many import') mempty code
-  ts <- mapM (readFile >=> assemble') is
+
+  dir <- getCurrentDirectory
+  ts <- forM is $ \x -> do
+    let (f, pth) = let (a,b) = span (/= '/') $ reverse x in (reverse a, reverse b)
+    unless (null pth) $ setCurrentDirectory pth
+    r <- readFile f >>= assemble'
+    setCurrentDirectory dir
+    return r
+
   let t = Tree . foldMap sections $ catMaybes ts
-  Right tree <- pure $ runParser (many import' >> parser t) mempty code
+  Right tree <- pure $ runParser (many import' >> (parser t <|> return t)) mempty code
   return $ return tree

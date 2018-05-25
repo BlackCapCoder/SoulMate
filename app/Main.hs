@@ -52,7 +52,7 @@ runProgram os = do
 
 main :: IO ()
 main = do
-  interpreter
+  assint
 
 interpreter = do
   args <- unwords <$> getArgs
@@ -65,3 +65,10 @@ assembler = do
   code <- readFile args
   Just out <- assemble code
   putStr out
+
+assint = do
+  args <- unwords <$> getArgs
+  code <- readFile args
+  Just out <- assemble code
+  let ops = parseProgram out
+  BS.putStr =<< runProgram ops

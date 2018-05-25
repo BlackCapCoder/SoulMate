@@ -20,12 +20,26 @@ SoulMate currently support the following operations:
 
 Initially, both stacks are empty. If either machine attempts to pop from an empty stack, a single bit is read from STDIN. If no input is available on STDIN you get a zero instead.
 
-Once the program terminates the bits of the active stack are written to STDOUT.
+Once the program terminates the bits on the active stack are written to STDOUT.
 
-## byte version
+## The assembler
 
-Operations that work on bytes implemented in terms of bits can be found in the `8` folder. So, for instance, if you wanted the first 3 bytes of the input in reverse order on the stack, you could just go:
-``` bash
-(cd 8; cat swap pass swap toggle pass toggle swap) > code
-echo abc | stack exec nand-exe -- code
+Because SoulMate is an unreadable mess, I decided to create an assembler. The assembler has the following syntax:
+
+```
+# Relative or absolute path to file to import
+# lib/8bit
+# lib/mux
+
+sectionName {
+  regular SoulMate code
+  code code code
+  indentaion doesn't actually matter
+}
+
+anotherSection {
+  Use a dollar sign followed by the section name to
+  paste it into the code, like this: $sectionName
+  code code $sectionName code code
+}
 ```
