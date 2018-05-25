@@ -1,8 +1,6 @@
 # zero
 
 zero8 {
-
-  Push 8 zeroes
   $zero
   $zero
   $zero
@@ -11,5 +9,4 @@ zero8 {
   $zero
   $zero
   $zero
-
 }
