@@ -4,13 +4,16 @@ import Data.Maybe
 
 
 data Op = NAnd | Dup | Swap | Toggle | Pass
+        | Loop Program -- JNZ
         deriving (Show)
 
-parseOp = flip lookup
-  [ ('&', NAnd  )
-  , (':', Dup   )
-  , ('/', Swap  )
-  , (',', Toggle)
-  , ('#', Pass  ) ]
+type Program = [Op]
 
-parseProgram = mapMaybe parseOp
+-- parseOp = flip lookup
+--   [ ('&', NAnd  )
+--   , (':', Dup   )
+--   , ('/', Swap  )
+--   , (',', Toggle)
+--   , ('#', Pass  ) ]
+--
+-- parseProgram = mapMaybe parseOp

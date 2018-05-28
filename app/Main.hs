@@ -17,6 +17,7 @@ import System.IO
 
 import Lang
 import Assembler
+import Parser
 
 
 type Memory  a = ([a], [a])
@@ -38,7 +39,8 @@ runOp = \case
   Dup    -> do a <- getBit; putBit a; putBit a
   Swap   -> do a <- getBit; b <- getBit; putBit a; putBit b
   NAnd   -> do a <- getBit; b <- getBit; putBit . not $ a && b
-  Pass   -> do a <- getBit; modify $ \(l,r) -> (l, a:r)
+  Pass   -> do a <- getBit; modify $ second (a:)
+  Loop p -> fix $ \r -> getBit >>= flip when (mapM_ runOp p >> r)
 
 --------
 
@@ -54,21 +56,21 @@ main :: IO ()
 main = do
   assint
 
-interpreter = do
-  args <- unwords <$> getArgs
-  code <- readFile args
-  let ops = parseProgram code
-  BS.putStr =<< runProgram ops
-
-assembler = do
-  args <- unwords <$> getArgs
-  code <- readFile args
-  Just out <- assemble code
-  putStr out
+-- interpreter = do
+--   args <- unwords <$> getArgs
+--   code <- readFile args
+--   let ops = parseProgram code
+--   BS.putStr =<< runProgram ops
+--
+-- assembler = do
+--   args <- unwords <$> getArgs
+--   code <- readFile args
+--   Just out <- assemble code
+--   putStr out
 
 assint = do
   args <- unwords <$> getArgs
   code <- readFile args
   Just out <- assemble code
-  let ops = parseProgram out
+  let Just ops = parse out
   BS.putStr =<< runProgram ops

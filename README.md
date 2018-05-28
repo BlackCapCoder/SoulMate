@@ -6,15 +6,15 @@ Besides stack manipulation operations, the machines support the NAND gate, with 
 
 SoulMate currently support the following operations:
 
-| Symbol | Description                                                                                                    |
-|--------|----------------------------------------------------------------------------------------------------------------|
-| `:`    | Duplicates the topmost element on the stack                                                                    |
-| `/`    | Swaps the two topmost elements on the stack                                                                    |
-| `,`    | Give focus to the other stack machine such that all proceeding operations will be executed on the other stack  |
-| `#`    | Pops the topmost element off the stack, then pushes it on to the other machine's stack                         |
-| `&`    | Pops two bits off the stack, then pushes the result of the NAND operation                                      |
-
-*At the moment SoulMate is not turing-complete, because there is no way to loop.*
+| Symbol | Description                                                                                                   |
+|--------|---------------------------------------------------------------------------------------------------------------|
+| `:`    | Duplicates the topmost element on the stack                                                                   |
+| `/`    | Swaps the two topmost elements on the stack                                                                   |
+| `,`    | Give focus to the other stack machine such that all proceeding operations will be executed on the other stack |
+| `#`    | Pops the topmost element off the stack, then pushes it on to the other machine's stack                        |
+| `&`    | Pops two bits off the stack, then pushes the result of the NAND operation                                     |
+| `[`    | Pop a bit, if zero, jump past matching bracket                                                                |
+| `]`    | Jump to matching bracket                                                                                      |
 
 ## IO
 
