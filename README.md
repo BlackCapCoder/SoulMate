@@ -42,4 +42,14 @@ anotherSection {
   paste it into the code, like this: $sectionName
   code code $sectionName code code
 }
+
+withVars lorem ipsum {
+  $lorem : $lorem / [$ipsum]
+}
+
+example {
+  $withVars { This is lorem }
+            { This is ipsum }
+}
+
 ```

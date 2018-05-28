@@ -1,0 +1,105 @@
+include /home/blackcap/hs/nand/lib/8bit
+include /home/blackcap/hs/nand/lib/8/dup8
+include /home/blackcap/hs/nand/lib/8/pass8
+include /home/blackcap/hs/nand/lib/8/pop8
+include /home/blackcap/hs/nand/lib/8/../pop
+include /home/blackcap/hs/nand/lib/mux
+include /home/blackcap/hs/nand/lib/and
+include /home/blackcap/hs/nand/lib/not
+include /home/blackcap/hs/nand/lib/or
+include /home/blackcap/hs/nand/lib/zero
+include /home/blackcap/hs/nand/lib/8/swap8
+include /home/blackcap/hs/nand/lib/8/zero8
+include /home/blackcap/hs/nand/lib/8/../zero
+
+zero { :::&&:& }
+zero8 {
+  $zero
+  $zero
+  $zero
+  $zero
+  $zero
+  $zero
+  $zero
+  $zero
+}
+swap8 {
+
+  $pass8
+  ,########,
+
+  Swap the reversed bits into place
+  /#/#/#/#/#/#/#/#/#/#/#/#/#/#/#
+  ,###############,
+  /#/#/#/#/#/#/#/#/#/#/#/#/#/#
+  ,##############,
+  /#/#/#/#/#/#/#/#/#/#/#/#/#
+  ,#############,
+  /#/#/#/#/#/#/#/#/#/#/#/#
+  ,############,
+  /#/#/#/#/#/#/#/#/#/#/#
+  ,###########,
+  /#/#/#/#/#/#/#/#/#/#
+  ,##########,
+  /#/#/#/#/#/#/#/#/#
+  ,#########,
+  /#/#/#/#/#/#/#/#
+  ,########,
+
+}
+zero { :::&&:& }
+or { :&/:&& }
+not { :& }
+and { &:& }
+mux {
+  :# $and / ,#, $not $and $or
+}
+pop { $zero $mux }
+pop8 {
+  $pop
+  $pop
+  $pop
+  $pop
+  $pop
+  $pop
+  $pop
+  $pop
+}
+pass8 {
+  ##,/,
+  #,/#/,#
+  #,/#/#/,##
+  #,/#/#/#/,###
+  #,/#/#/#/#/,####
+  #,/#/#/#/#/#/,#####
+  #,/#/#/#/#/#/#/,######
+}
+dup8 {
+
+  Clone 8 bits from A to B
+  ########,
+  :#/#/#/#/#/#/#/#,
+  #######,
+  :#/#/#/#/#/#/#,
+  ######,
+  :#/#/#/#/#/#,
+  #####,
+  :#/#/#/#/#,
+  ####,
+  :#/#/#/#,
+  ###,
+  :#/#/#,
+  ##,
+  :#/#,
+  #,
+  :#
+
+  $pass8 ,
+
+}
+main {
+}
+
+Assembling zero
+Assembling zero8
+Assembling swap8

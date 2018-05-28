@@ -1,0 +1,16 @@
+# one
+# zero
+# not
+
+if true false {
+
+  ,$one,
+
+  if 1 [
+    ,$not,
+    $true
+  $zero], else [
+    ,$false,
+  $zero],
+
+}

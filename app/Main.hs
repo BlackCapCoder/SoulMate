@@ -14,7 +14,8 @@ import Data.Function (fix)
 import Control.Arrow
 import System.Environment
 import System.IO
-import Text.Megaparsec (parseTest)
+import Text.Megaparsec (parseTest, runParserT, parseErrorPretty)
+import qualified Data.Map as M
 
 import Lang
 import Assembler
@@ -80,6 +81,14 @@ main = do
 assint = do
   args <- unwords <$> getArgs
   code <- readFile args
-  Just out <- assemble code
-  let Just ops = parse out
-  BS.putStr =<< runProgram ops
+  out <- runParserT assembler mempty code
+  case out of
+    Left err -> putStrLn $ parseErrorPretty err
+    Right tree -> do
+      case M.lookup "main" $ sections tree of
+        Nothing -> putStrLn $ "section main not found"
+        Just ([], code') -> do
+          let Just ops = parse $ unplain =<< code'
+          putStrLn "\nRunning code!"
+          putStrLn "---------------\n"
+          BS.putStr =<< runProgram ops

@@ -1,12 +1,6 @@
-# lib/dup
+# lib/if
 # lib/one
-# lib/pop
 
 main {
-  $one / $pop ,
-  $one / $pop
-
-  $one, $one,
-
-  $dup
+  $if {} {$one $one}
 }
