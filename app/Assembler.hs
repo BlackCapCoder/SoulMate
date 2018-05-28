@@ -46,7 +46,12 @@ include = do
 loadIncludes :: S.Set String -> Assembler (S.Set String)
 loadIncludes includes = do
   dir <- liftIO getCurrentDirectory
-  is <- S.fromList . map (dir </>) <$> (some include <|> return [])
+  is <- map (dir </>) <$> (some include <|> return [])
+
+  is' <- fmap concat $ liftIO $ forM is $ \i -> do
+    b <- doesFileExist i
+    if b then return [i]
+         else filterM doesFileExist =<< map (i </>) <$> listDirectory i
 
   foldM (\includes' i -> do
       -- if | S.member i includes' -> return includes'
@@ -59,7 +64,7 @@ loadIncludes includes = do
              includes'' <- loadIncludes includes'
              liftIO $ setCurrentDirectory dir
              return $ S.insert i includes''
-    ) includes is
+    ) includes $ S.fromList is'
 
 assembler :: Assembler Tree
 assembler = do
