@@ -30,6 +30,7 @@ Because SoulMate is an unreadable mess, I decided to create an assembler. The as
 # Relative or absolute path to file to import
 # lib/8bit
 # lib/mux
+# comma, works, too
 
 sectionName {
   regular SoulMate code

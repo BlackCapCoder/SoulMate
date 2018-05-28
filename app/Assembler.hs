@@ -35,18 +35,25 @@ instance Monoid Tree where
   mappend a b = Tree { sections = sections a `mappend` sections b }
 
 
-include :: Assembler String
+include :: Assembler [String]
 include = do
   char '#'
   space
-  ret <- many $ satisfy (/='\n')
+  inc <- many $ satisfy (/='\n')
+  let Right ret = runParser csv mempty $ inc ++ "\n"
   space
   return ret
+
+csv :: Parsec Void String [String]
+csv = some . L.lexeme ( do many $ oneOf " \t"
+                           oneOf ",\n"
+                           void . many $ oneOf " \t"
+                      ) . some $ noneOf " ,\n"
 
 loadIncludes :: S.Set String -> Assembler (S.Set String)
 loadIncludes includes = do
   dir <- liftIO getCurrentDirectory
-  is <- map (dir </>) <$> (some include <|> return [])
+  is <- map (dir </>) . concat <$> (some include <|> return [])
 
   is' <- fmap concat $ liftIO $ forM is $ \i -> do
     b <- doesFileExist i
@@ -56,7 +63,7 @@ loadIncludes includes = do
   foldM (\includes' i -> do
       -- if | S.member i includes' -> return includes'
       --    | otherwise -> do
-             liftIO $ putStrLn $ "include " ++ i
+             -- liftIO $ putStrLn $ "include " ++ i
              let (pth, f) = splitFileName i
              liftIO $ setCurrentDirectory pth
              src <- liftIO $ readFile f
@@ -88,7 +95,7 @@ brackets = between (symbol "{" ) (symbol "}")
 section :: Tree -> Assembler Tree
 section t = do
   name <- word
-  liftIO $ putStrLn $ "Assembling " ++ name
+  -- liftIO $ putStrLn $ "Assembling " ++ name
   args <- many word
   code <- flatten <$> brackets (body args t)
   return $ t { sections = M.insert name (args, code) $ sections t }

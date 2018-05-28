@@ -1,5 +1,5 @@
-# lib/8bit
+# lib, lib/gates
 
 main {
-  $pop8
+  $zero
 }
