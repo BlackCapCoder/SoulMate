@@ -1,4 +1,4 @@
 # zero
-# not
+# gates/not
 
 one { $zero $not }

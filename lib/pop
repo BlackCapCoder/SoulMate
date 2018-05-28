@@ -1,4 +1,4 @@
-#zero
-#mux
+# zero
+# gates/mux
 
 pop { $zero $mux }

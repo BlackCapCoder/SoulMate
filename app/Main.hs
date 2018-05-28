@@ -89,6 +89,9 @@ assint = do
         Nothing -> putStrLn $ "section main not found"
         Just ([], code') -> do
           let Just ops = parse $ unplain =<< code'
-          putStrLn "\nRunning code!"
+          putStrLn ""
+          putStrLn $ showProg ops
+          putStrLn "\n---------------"
+          putStrLn "Running code!"
           putStrLn "---------------\n"
           BS.putStr =<< runProgram ops

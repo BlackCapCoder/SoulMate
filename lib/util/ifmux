@@ -1,0 +1,9 @@
+# ../gates/mux
+
+ifmux cond true false {
+
+  Like if but evaluates everything before
+    checking the condition
+
+  $false $true $cond $mux
+}

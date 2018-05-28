@@ -1,0 +1,14 @@
+# ../zero
+# ../one
+# ifel
+
+dup {
+
+  Dup in terms of a loop
+    Unfortunately zero not and one are defined
+    in terms of dup
+
+  $ifel { $one  $one  }
+        { $zero $zero }
+
+}

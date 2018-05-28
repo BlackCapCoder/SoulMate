@@ -1,6 +1,2 @@
-# lib/ifel
-# lib/one
-
 main {
-  $ifel {} {$one $one}
 }

@@ -1,0 +1,11 @@
+# ../ifel
+# ../other
+
+succ {
+  $other { $zero }
+
+  [ $other { $one } ]
+  $one
+  $other { [ $other { $zero } ] }
+
+}

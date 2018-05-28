@@ -1,4 +1,4 @@
 # one
-# not
+# gates/not
 
 id { $not $one & }

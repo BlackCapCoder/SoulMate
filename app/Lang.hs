@@ -1,3 +1,4 @@
+{-# LANGUAGE LambdaCase #-}
 module Lang where
 
 import Data.Maybe
@@ -9,7 +10,18 @@ data Op = Dup
         | Pass
         | NAnd
         | JNZ Program
-        deriving (Show)
+
+instance Show Op where
+  show = \case
+    Dup -> ":"
+    Swap -> "/"
+    Toggle -> ","
+    Pass -> "#"
+    NAnd -> "&"
+    JNZ p -> '[' : showProg p ++ "]"
+
+showProg :: Program -> String
+showProg = concatMap show
 
 type Program = [Op]
 
