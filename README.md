@@ -44,12 +44,12 @@ anotherSection {
   code code $sectionName code code
 }
 
-withVars lorem ipsum {
+withParams lorem ipsum {
   $lorem : $lorem / [$ipsum]
 }
 
 example {
-  $withVars { This is lorem }
-            { This is ipsum }
+  $withParams { This is lorem }
+              { This is ipsum }
 }
 ```
