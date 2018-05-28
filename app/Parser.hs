@@ -19,14 +19,20 @@ parseOp = foldl1 (<|>) $ map (\(c, o) -> char c >> pure o)
   , (',', Toggle)
   , ('#', Pass  ) ]
 
+sc :: Parser ()
+sc = void (many $ noneOf "&:/,#[]")
+
 parseLoop :: Parser Op
-parseLoop = return . Loop =<< between (char '[') (char ']') (many parseAny)
+parseLoop = JNZ <$> between (char '[') (char ']') parseProgram
 
 parseAny :: Parser Op
-parseAny = parseOp <|> parseLoop <|> (satisfy (/=']') >> parseAny)
+parseAny = do
+  x <- parseOp <|> parseLoop
+  sc
+  return x
 
 parseProgram :: Parser Program
-parseProgram = many $ try parseAny
+parseProgram = sc >> many parseAny
 
 parse :: String -> Maybe Program
 parse code = do

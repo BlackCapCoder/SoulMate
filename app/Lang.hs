@@ -3,8 +3,12 @@ module Lang where
 import Data.Maybe
 
 
-data Op = NAnd | Dup | Swap | Toggle | Pass
-        | Loop Program -- JNZ
+data Op = Dup
+        | Swap
+        | Toggle
+        | Pass
+        | NAnd
+        | JNZ Program
         deriving (Show)
 
 type Program = [Op]
@@ -15,5 +19,5 @@ type Program = [Op]
 --   , ('/', Swap  )
 --   , (',', Toggle)
 --   , ('#', Pass  ) ]
---
+
 -- parseProgram = mapMaybe parseOp

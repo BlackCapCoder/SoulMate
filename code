@@ -1,6 +1,12 @@
-# lib/8bit
+# lib/dup
+# lib/one
+# lib/pop
 
 main {
-  $swap8 $pass8 $swap8 , $pass8 , $swap8
-  $dup8 $dup8 $pop8
+  $one / $pop ,
+  $one / $pop
+
+  $one, $one,
+
+  $dup
 }

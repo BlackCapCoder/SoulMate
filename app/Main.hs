@@ -14,6 +14,7 @@ import Data.Function (fix)
 import Control.Arrow
 import System.Environment
 import System.IO
+import Text.Megaparsec (parseTest)
 
 import Lang
 import Assembler
@@ -31,6 +32,12 @@ getBit = do
          e <- lift isEmpty
          if e then return False else lift getBool
 
+peekBit :: Machine (Memory Bool) Bool
+peekBit = do
+  f <- gets fst
+  if | (x:xs) <- f -> return x
+     | otherwise -> return False
+
 putBit :: Bool -> Machine (Memory Bool) ()
 putBit b = modify $ first (b:)
 
@@ -40,7 +47,9 @@ runOp = \case
   Swap   -> do a <- getBit; b <- getBit; putBit a; putBit b
   NAnd   -> do a <- getBit; b <- getBit; putBit . not $ a && b
   Pass   -> do a <- getBit; modify $ second (a:)
-  Loop p -> fix $ \r -> getBit >>= flip when (mapM_ runOp p >> r)
+  JNZ p  -> fix $ \r -> do
+    b <- getBit
+    when b (mapM_ runOp p >> r)
 
 --------
 
@@ -49,7 +58,7 @@ runProgram os = do
   let f = runBitGet . fmap snd . flip runStateT ([], []) $ mapM_ runOp os
   let x = runGet f inp
   let y = runPut . runBitPut . mapM_ putBool $ fst x
-  -- print x
+  print x
   return y
 
 main :: IO ()
