@@ -38,7 +38,7 @@ sectionName {
 }
 
 anotherSection {
-  Use a dollar sign followed by the section name to
+  Use a dollar sign followed by a section name to
   paste it into the code, like this: $sectionName
   code code $sectionName code code
 }
@@ -51,5 +51,4 @@ example {
   $withVars { This is lorem }
             { This is ipsum }
 }
-
 ```

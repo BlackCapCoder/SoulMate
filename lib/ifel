@@ -1,0 +1,19 @@
+# other
+# if
+# one
+# not
+
+ifel truePart falsePart {
+
+  $other {$one}
+
+  $if {
+    $other {$not}
+    $truePart
+  }
+
+  $other { $if {
+    $other {$falsePart}
+  }}
+
+}

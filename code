@@ -1,6 +1,6 @@
-# lib/if
+# lib/ifel
 # lib/one
 
 main {
-  $if {} {$one $one}
+  $ifel {} {$one $one}
 }
