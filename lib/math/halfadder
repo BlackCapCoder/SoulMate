@@ -1,0 +1,6 @@
+# ../gates/xor
+# ../gates/and
+
+halfadder {
+  :#/:# $and,$xor#,
+}

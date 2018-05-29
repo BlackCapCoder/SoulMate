@@ -1,4 +1,2 @@
-# not
-# and
-
+# not, and
 nor { $not / $not $and }

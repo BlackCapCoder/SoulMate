@@ -9,6 +9,7 @@ import qualified Text.Megaparsec.Char.Lexer as L
 import Control.Monad
 import Data.Void
 
+
 type Parser = Parsec Void String
 
 parseOp :: Parser Op

@@ -1,0 +1,12 @@
+# ../gates/xor
+# ../gates/and
+# ../gates/or
+
+fulladder {
+  :#/:#
+  $xor ,$and,
+  :#/:#
+  $xor
+  ,$and $or
+  #,/
+}

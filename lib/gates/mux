@@ -1,7 +1,4 @@
-# and
-# not
-# or
-
+# and, not, or
 mux {
   :# $and / ,#, $not $and $or
 }

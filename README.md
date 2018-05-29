@@ -27,7 +27,7 @@ Once the program terminates the bits on the active stack are written to STDOUT.
 Because SoulMate is an unreadable mess, I decided to create an assembler. The assembler has the following syntax:
 
 ```
-# Relative or absolute path to file to import
+# Relative or absolute path to a file or folder to import
 # lib/8bit
 # lib/gates/mux
 # comma, works, too
